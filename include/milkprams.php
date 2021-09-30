@@ -5,7 +5,11 @@ if (session_status() == PHP_SESSION_NONE) {
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 try {
-  $mysqli = new mysqli("localhost", "inventory", "password", "milk");
+  if($_SERVER['HTTP_HOST'] == 'localhost'){
+    $mysqli = new mysqli("localhost", "sonu", "password", "milk");
+  }else{
+    $mysqli = new mysqli("localhost", "inventory", "password", "milk");
+  }
   $mysqli->set_charset("utf8mb4");
 } catch(Exception $e) {
   error_log($e->getMessage());
